@@ -4,12 +4,13 @@ import json
 
 from lib.Elo import Elo
 
-class League(object):
-    """class that encapsulate the pool of player we're dealing with and their ranking"""
+
+class League:
+    """encapsulate the pool of player we're dealing with and their ranking"""
     def __init__(self, playersFile):
 
-        with open(playersFile,'r') as myFile:
-            self.fileName=playersFile
+        with open(playersFile, 'r') as myFile:
+            self.fileName = playersFile
             self.players = json.loads(myFile.read())
             self.elo = Elo()
 
@@ -20,7 +21,8 @@ class League(object):
     def applyResult(self, player1, player2, result):
 
         self.players[player1]["elo"] = self.elo.compute(self.players[player1]["elo"],self.players[player2]["elo"],result)
-        self.players[player2]["elo"] = self.elo.compute(self.players[player2]["elo"],self.players[player1]["elo"],result)
+        # if player 1 gets result, player 2 should get 1-result
+        self.players[player2]["elo"] = self.elo.compute(self.players[player2]["elo"],self.players[player1]["elo"], 1-result)
         self.save()
 
     def save(self):
