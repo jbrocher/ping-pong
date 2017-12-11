@@ -18,7 +18,6 @@ class Game:
         Give the expected result of the game base on the elo of each player.
         """
         winProbability = self.players.winProbability(self.player1, self.player2)
-        print(winProbability)
         if winProbability >= 0.5:
             event = "wins"
             probability = winProbability
@@ -29,6 +28,5 @@ class Game:
 
     def result(self, result):
         """apply the elo modification depeding on the result of the game"""
-
-        self.players.modify(self.player1, self.player2, result)
+        self.players.applyResult(self.player1, self.player2, result)
         self.players.printClassement()

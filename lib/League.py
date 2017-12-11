@@ -21,7 +21,8 @@ class League:
     def applyResult(self, player1, player2, result):
 
         self.players[player1]["elo"] = self.elo.compute(self.players[player1]["elo"],self.players[player2]["elo"],result)
-        self.players[player2]["elo"] = self.elo.compute(self.players[player2]["elo"],self.players[player1]["elo"],result)
+        # if player 1 gets result, player 2 should get 1-result
+        self.players[player2]["elo"] = self.elo.compute(self.players[player2]["elo"],self.players[player1]["elo"], 1-result)
         self.save()
 
     def save(self):
