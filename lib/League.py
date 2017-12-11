@@ -4,12 +4,13 @@ import json
 
 from lib.Elo import Elo
 
-class League(object):
-    """class that encapsulate the pool of player we're dealing with and their ranking"""
+
+class League:
+    """encapsulate the pool of player we're dealing with and their ranking"""
     def __init__(self, playersFile):
 
-        with open(playersFile,'r') as myFile:
-            self.fileName=playersFile
+        with open(playersFile, 'r') as myFile:
+            self.fileName = playersFile
             self.players = json.loads(myFile.read())
             self.elo = Elo()
 
