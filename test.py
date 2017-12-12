@@ -28,13 +28,13 @@ class LeagueTest(unittest.TestCase):
     """docstring for EloTest."""
 
     def testWinProbability(self):
-        league = League("data/players.json")
+        league = League("data/players/players.json")
 
 
         prob = league.winProbability("JB", "Manel")
         self.assertEqual(0.76, prob, 'testComppute fails, actula prob : {}'.format(prob))
 
-
+    
 
 
 unittest.main()
