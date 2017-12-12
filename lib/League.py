@@ -7,7 +7,6 @@ from lib.Elo import Elo
 class League:
     """Encapsulate the pool of player we're dealing with and their ranking."""
 
-
     def __init__(self, playersFile):
         """Contrsuctor."""
         with open(playersFile, 'r') as myFile:
