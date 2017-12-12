@@ -60,8 +60,62 @@ class League:
             myFile.write(json.dumps(self._players))
 
     def printClassement(self):
-        """Print the ranking."""
-        print(json.dumps(self._players))
+        """Return the ranking as a string."""
+        return json.dumps(self._players)
+
+    def searchPlayerByName(self, playerName):
+        """Search the player in the League based on his name.
+
+        Returns a list of result as tuples (position, player) where position is the
+        position in the list, and player is the dictionnary of the player
+        """
+        results = []
+        for i, player in enumerate(self._players):
+            if player["name"] == playerName:
+                results.append((i, player))
+        return results
+
+    def delPlayer(self, playerName):
+        """Delete the player identified by playerName."""
+        searchResult = self.searchPlayerByName(playerName)
+
+        if len(searchResult) == 1:
+            del self._players[searchResult[0][0]]
+        elif len(searchResult) == 0:
+            raise ValueError("no player with this name")
+        else:
+            raise ValueError("wrong value")
+
+    def addPlayer(self, player):
+        """Add a player to the league and save the league.
+
+        arguments
+        player -- dictionnary containing the player data
+        """
+        if self.searchPlayerByName(player["name"]) != []:
+            raise ValueError("A player with this name already exists")
+        else:
+            self._players.append(player)
+            self.save()
+
+    def modifyPlayer(self, playerName, **attributes):
+        """Modify the player whose name is player accordingly to the attributes passed in parameters."""
+        searchResult = self.searchPlayerByName(playerName)
+
+        if len(searchResult) == 1:
+            pos = searchResult[0][0]
+            for attribute, value in attributes.items():
+                try:
+                    self._players[pos][attribute] = value
+                except KeyError as error:
+                    raise KeyError("invalid attributes")
+        elif len(searchResult) == 0:
+            raise ValueError("no player with this name")
+        else:
+            raise ValueError("wrong value")
+
+
+
 
     players = property(_getPlayers, _setPlayers)
     elo = property(_getElo, _setElo)
