@@ -12,29 +12,75 @@ class EloTest(unittest.TestCase):
         elo = Elo()
         elo1 = 500
         elo2 = 300
-        prob = elo.winProbability(elo1-elo2)
-        self.assertEqual(0.76, prob, 'testComppute fails, actula prob : {}'.format(prob))
+        prob = elo.winProbability(elo1 - elo2)
+        self.assertEqual(
+            0.76, prob, 'testComppute fails, actula prob : {}'.format(prob))
 
     def testCompute(self):
-        elo=Elo()
+        elo = Elo()
         elo1 = 500
         elo2 = 300
         result = 1
-        newElo = elo.compute(elo1,elo2,result)
-        self.assertEqual(502.4, newElo, 'testComppute fails, actula elo : {}'.format(newElo))
+        newElo = elo.compute(elo1, elo2, result)
+        self.assertEqual(
+            502.4, newElo, 'testComppute fails, actula elo : {}'.format(newElo))
 
 
 class LeagueTest(unittest.TestCase):
     """docstring for EloTest."""
 
     def testWinProbability(self):
-        league = League("data/players/players.json")
+        league = League("data/unit-testing/players/players.json")
+
+        prob = league.winProbability(0, 1)
+        self.assertEqual(
+            0.76, prob, 'testComppute fails, actula prob : {}'.format(prob))
+
+    def testSearchPlayerByname(self):
+        league = League("data/unit-testing/players/players.json")
+        results = league.searchPlayerByName("JB")
+        self.assertEqual(results, [(0, {
+            "name": "JB",
+            "elo": 500
+        })])
+
+    def testAddPlayer(self):
+        league = League("data/unit-testing/players/players.json")
+        league.addPlayer({"name": "Biausser", "elo": 0})
+
+        results = league.searchPlayerByName("Biausser")
+        self.assertEqual(results, [(3, {
+            "name": "Biausser",
+            "elo": 0
+        })])
+        with open("data/unit-testing/players/players.json",'w') as testFile:
+            testFile.write('[{"name": "JB", "elo": 500}, {"name": "Manel", "elo": 300}, {"name": "Guilhem", "elo": 3000}]')
+        with self.assertRaises(ValueError):
+            league.addPlayer({"name": "JB", "elo": 4})
+
+    def testDelPlayer(self):
+        league = League("data/unit-testing/players/players.json")
+        league.delPlayer("JB")
 
 
-        prob = league.winProbability("JB", "Manel")
-        self.assertEqual(0.76, prob, 'testComppute fails, actula prob : {}'.format(prob))
+        self.assertEqual(league.searchPlayerByName("JB"),[])
 
-    
+        with open("data/unit-testing/players/players.json",'w') as testFile:
+            testFile.write('[{"name": "JB", "elo": 500}, {"name": "Manel", "elo": 300}, {"name": "Guilhem", "elo": 3000}]')
+
+    def testModifyPlayer(self):
+        league = League("data/unit-testing/players/players.json")
+        league.modifyPlayer("JB", elo=600)
+
+
+        self.assertEqual(league.searchPlayerByName("JB"),[(0,{"name": "JB", "elo": 600})])
+
+        with open("data/unit-testing/players/players.json",'w') as testFile:
+            testFile.write('[{"name": "JB", "elo": 500}, {"name": "Manel", "elo": 300}, {"name": "Guilhem", "elo": 3000}]')
+
+
+
+
 
 
 unittest.main()
