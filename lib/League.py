@@ -98,21 +98,5 @@ class League:
             self._players.append(player)
             self.save()
 
-    def modifyPlayer(self, playerName, **attributes):
-        """Modify the player whose name is player accordingly to the attributes passed in parameters."""
-        searchResult = self.searchPlayerByName(playerName)
-
-        if len(searchResult) == 1:
-            pos = searchResult[0][0]
-            for attribute, value in attributes.items():
-                try:
-                    self._players[pos][attribute] = value
-                except KeyError:
-                    raise KeyError("invalid attributes")
-        elif len(searchResult) == 0:
-            raise ValueError("no player with this name")
-        else:
-            raise ValueError("wrong value")
-
     players = property(_getPlayers, _setPlayers)
     elo = property(_getElo, _setElo)

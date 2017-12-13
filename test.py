@@ -70,11 +70,6 @@ class LeagueTest(unittest.TestCase):
         league.delPlayer("JB")
         self.assertEqual(league.searchPlayerByName("JB"), [])
 
-    def testModifyPlayer(self):
-        self.resetTestFile()
-        league = League("data/unit-testing/players/players.json")
-        league.modifyPlayer("JB", elo=600)
-        self.assertEqual(league.searchPlayerByName("JB"), [(0, {"name": "JB", "elo": 600})])
 
 
 unittest.main()
