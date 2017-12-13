@@ -107,15 +107,12 @@ class League:
             for attribute, value in attributes.items():
                 try:
                     self._players[pos][attribute] = value
-                except KeyError as error:
+                except KeyError:
                     raise KeyError("invalid attributes")
         elif len(searchResult) == 0:
             raise ValueError("no player with this name")
         else:
             raise ValueError("wrong value")
-
-
-
 
     players = property(_getPlayers, _setPlayers)
     elo = property(_getElo, _setElo)
