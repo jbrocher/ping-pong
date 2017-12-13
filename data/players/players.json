@@ -1,5 +1,13 @@
-{
-"JB": {"elo": 500},
-"Manel": {"elo": 300},
-"Guilhem": {"elo": 3000}
-}
+[{
+    "name": "JB",
+    "elo": 500
+  },
+  {
+    "name": "Manel",
+    "elo": 300
+  },
+  {
+    "name": "Guilhem",
+    "elo": 3000
+  }
+]
