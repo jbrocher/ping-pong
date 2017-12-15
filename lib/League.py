@@ -64,7 +64,13 @@ class League:
 
     def printClassement(self):
         """Return the ranking as a string."""
-        return json.dumps(self._players)
+        toPrint = ""
+        rank = 1
+        ranking = self.sortByElo()
+        for player in ranking:
+            toPrint = toPrint + "{}. {} ({})\n".format(rank, player["name"], player["elo"])
+            rank = rank + 1
+        return toPrint
 
     def searchPlayerByName(self, playerName):
         """Search the player in the League based on his name.
