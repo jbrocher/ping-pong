@@ -22,3 +22,8 @@ class Menu:
             print('Player error!')
             return self.choose_player(pool)
         return league.searchPlayerByName(player)
+
+    def exit(self, pool='data/unit-testing/players/players.json'):
+        """Leave the menu."""
+        print('Bye')
+        sys.exit()
