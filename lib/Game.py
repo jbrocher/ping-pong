@@ -25,6 +25,7 @@ class Game:
             event = "loses"
             probability = 1 - winProbability
         print("Player1 {} with {} of probability".format(event, probability))
+        return("Player1 {} with {} of probability".format(event, probability))
 
     def result(self, result):
         """apply the elo modification depeding on the result of the game"""
