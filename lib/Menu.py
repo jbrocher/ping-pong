@@ -23,6 +23,22 @@ class Menu:
             return self.choose_player(pool)
         return league.searchPlayerByName(player)
 
+    def simulate_game(self, pool):
+        """Simulate a game between two players."""
+        print('You chose to simulate a game:')
+        print('Here is the current league:')
+        league = League(pool)
+        classement = league.printClassement()
+        print(classement)
+        print('Choose player 1:')
+        p1 = self.choose_player(pool)
+        print('Choose player 2:')
+        p2 = self.choose_player(pool)
+        player1 = p1[0][0]
+        player2 = p2[0][0]
+        game = Game(pool, player1, player2)
+        return game.simulate()
+
     def exit(self, pool='data/unit-testing/players/players.json'):
         """Leave the menu."""
         print('Bye')
