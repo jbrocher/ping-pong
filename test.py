@@ -103,5 +103,13 @@ class MenuTest(PingPongTest):
         output = menu.choose_player(pool='data/unit-testing/players/players.json')
         self.assertEqual(output, [(0, {'elo': 500, 'name': 'JB'})])
 
+    @mock.patch('builtins.input', side_effect=['JB', 'Manel'])
+    def testSimulateGame(self, input):
+        """Test simulate_game."""
+        self.resetTestFile()
+        menu = Menu()
+        output = menu.simulate_game(pool='data/unit-testing/players/players.json')
+        self.assertEqual(output, 'Player1 wins with 0.76 of probability')
+
 
 unittest.main()
