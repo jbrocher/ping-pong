@@ -43,6 +43,9 @@ class League:
         """
         raise AttributeError("self._elo is private")
 
+    def sortByElo(self):
+        return sorted(self._players, key=lambda player: player["elo"], reverse=True)
+
     def winProbability(self, player1, player2):
         """Return the probability of win of player 1 over player 2."""
         return self._elo.winProbability(self._players[player1]["elo"] - self._players[player2]["elo"])
