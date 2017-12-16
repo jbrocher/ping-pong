@@ -43,6 +43,9 @@ class League:
         """
         raise AttributeError("self._elo is private")
 
+    def sortByElo(self):
+        return sorted(self._players, key=lambda player: player["elo"], reverse=True)
+
     def winProbability(self, player1, player2):
         """Return the probability of win of player 1 over player 2."""
         return self._elo.winProbability(self._players[player1]["elo"] - self._players[player2]["elo"])
@@ -61,7 +64,13 @@ class League:
 
     def printClassement(self):
         """Return the ranking as a string."""
-        return json.dumps(self._players)
+        toPrint = ""
+        rank = 1
+        ranking = self.sortByElo()
+        for player in ranking:
+            toPrint = toPrint + "{}. {} ({})\n".format(rank, player["name"], player["elo"])
+            rank = rank + 1
+        return toPrint
 
     def searchPlayerByName(self, playerName):
         """Search the player in the League based on his name.

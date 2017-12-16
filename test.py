@@ -1,6 +1,5 @@
 """test unitaires"""
 
-import builtins
 from unittest import mock
 import unittest
 from lib.Elo import Elo
@@ -78,6 +77,13 @@ class LeagueTest(PingPongTest):
         league = League("data/unit-testing/players/players.json")
         league.delPlayer("JB")
         self.assertEqual(league.searchPlayerByName("JB"), [])
+
+    def testPrintClassement(self):
+        self.resetTestFile()
+        league = League("data/unit-testing/players/players.json")
+        printed = league.printClassement()
+        with open("data/unit-testing/print/players.txt") as myFile:
+            self.assertEqual(printed, myFile.read())
 
 
 class InteractionsTest(PingPongTest):
