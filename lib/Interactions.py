@@ -60,8 +60,13 @@ class MainMenu:
 
     def possible_menu_inputs(self):
         """Display menu options."""
-        for i in self.possibilites:
-            print(i, ':', self.possibilites[i])
+        possibilitesList = []
+        for key, value in self.possibilites.items():
+            possibilitesList.append((key, value))
+        sortedPossibilitiesList = sorted(possibilitesList, key=lambda possibility: possibility[0])
+
+        for possibility in sortedPossibilitiesList:
+            print("{} : {}".format(possibility[0], possibility[1]))
 
     def get_menu_input(self):
         """Ask user to choose an action."""
