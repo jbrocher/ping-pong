@@ -2,8 +2,9 @@
 
 import glob
 from lib.Menu import Menu
+from collections import OrderedDict
 
-p = {}
+p = OrderedDict()
 p['0'] = 'get the elo score of a player (not yet)'
 p['1'] = 'simulate a game'
 p['10'] = 'leave'
