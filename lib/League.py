@@ -44,7 +44,8 @@ class League:
         raise AttributeError("self._elo is private")
 
     def sortByElo(self):
-        return sorted(self._players, key=lambda player: player["elo"], reverse=True)
+        self._players = sorted(self._players, key=lambda player: player["elo"], reverse=True)
+        return self._players
 
     def winProbability(self, player1, player2):
         """Return the probability of win of player 1 over player 2."""
@@ -94,6 +95,7 @@ class League:
             raise ValueError("no player with this name")
         else:
             raise ValueError("wrong value")
+        self.save()
 
     def addPlayer(self, player):
         """Add a player to the league and save the league.
