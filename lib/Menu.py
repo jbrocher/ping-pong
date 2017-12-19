@@ -46,7 +46,7 @@ class Menu:
     def pick(self):
         """Ask for the choice and executes the action accoringly."""
         n = len(self._menus)
-        choice = self.getIntUserInput(0, n, "Type your choice")
+        choice = self.getIntUserInput(0, n, "Type your choice : ")
         parameters = self.parameters[choice]
         menu = self._menus[choice]
 
