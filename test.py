@@ -86,36 +86,36 @@ class LeagueTest(PingPongTest):
             self.assertEqual(printed, myFile.read())
 
 
-class InteractionsTest(PingPongTest):
-    """Docstring for InteractionsTest."""
-
-    @mock.patch('builtins.input', side_effect=['0'])
-    def testGetPoolInput(self, input):
-        """Test get_pool_input."""
-        self.resetTestFile()
-        interact = Interactions()
-        output = interact.get_pool_input(poolpath='data/unit-testing/players/*.json')
-        self.assertEqual(output, 'data/unit-testing/players/players.json')
-
-
-class MenuTest(PingPongTest):
-    """Docstring for MenuTest."""
-
-    @mock.patch('builtins.input', side_effect=['JB'])
-    def testChoosePlayer(self, input):
-        """Test choose_player."""
-        self.resetTestFile()
-        menu = Menu()
-        output = menu.choose_player(pool='data/unit-testing/players/players.json')
-        self.assertEqual(output, [(0, {'elo': 500, 'name': 'JB'})])
-
-    @mock.patch('builtins.input', side_effect=['JB', 'Manel'])
-    def testSimulateGame(self, input):
-        """Test simulate_game."""
-        self.resetTestFile()
-        menu = Menu()
-        output = menu.simulate_game(pool='data/unit-testing/players/players.json')
-        self.assertEqual(output, 'Player1 wins with 0.76 of probability')
+# class InteractionsTest(PingPongTest):
+#     """Docstring for InteractionsTest."""
+#
+#     @mock.patch('builtins.input', side_effect=['0'])
+#     def testGetPoolInput(self, input):
+#         """Test get_pool_input."""
+#         self.resetTestFile()
+#         interact = Interactions()
+#         output = interact.get_pool_input(poolpath='data/unit-testing/players/*.json')
+#         self.assertEqual(output, 'data/unit-testing/players/players.json')
+#
+#
+# class MenuTest(PingPongTest):
+#     """Docstring for MenuTest."""
+#
+#     @mock.patch('builtins.input', side_effect=['JB'])
+#     def testChoosePlayer(self, input):
+#         """Test choose_player."""
+#         self.resetTestFile()
+#         menu = Menu()
+#         output = menu.choose_player(pool='data/unit-testing/players/players.json')
+#         self.assertEqual(output, [(0, {'elo': 500, 'name': 'JB'})])
+#
+#     @mock.patch('builtins.input', side_effect=['JB', 'Manel'])
+#     def testSimulateGame(self, input):
+#         """Test simulate_game."""
+#         self.resetTestFile()
+#         menu = Menu()
+#         output = menu.simulate_game(pool='data/unit-testing/players/players.json')
+#         self.assertEqual(output, 'Player1 wins with 0.76 of probability')
 
 
 unittest.main()

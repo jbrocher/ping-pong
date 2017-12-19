@@ -65,7 +65,7 @@ class League:
     def printClassement(self):
         """Return the ranking as a string."""
         toPrint = ""
-        rank = 1
+        rank = 0
         ranking = self.sortByElo()
         for player in ranking:
             toPrint = toPrint + "{}. {} ({})\n".format(rank, player["name"], player["elo"])
