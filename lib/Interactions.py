@@ -2,8 +2,9 @@
 
 import glob
 from lib.Menu import Menu
+from collections import OrderedDict
 
-p = {}
+p = OrderedDict()
 p['0'] = 'get the elo score of a player (not yet)'
 p['1'] = 'simulate a game'
 p['10'] = 'leave'
@@ -64,11 +65,13 @@ class MainMenu:
             print(i, ':', self.possibilites[i])
 
     def get_menu_input(self):
+        import pdb; pdb.set_trace()
         """Ask user to choose an action."""
         menu_input = input('>>')
         if menu_input not in self.possibilites:
             print('Invalid input')
-            self.get_menu_input()
+            menu_input = self.get_menu_input()
+
         return menu_input
 
     def exec_menu(self, menu_input, pool='data/unit-testing/players/players.json'):
