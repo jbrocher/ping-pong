@@ -1,11 +1,8 @@
 """test unitaires"""
 
-from unittest import mock
 import unittest
 from lib.Elo import Elo
 from lib.League import League
-from lib.Interactions import Interactions
-from lib.Menu import Menu
 
 
 class EloTest(unittest.TestCase):
@@ -35,7 +32,7 @@ class PingPongTest(unittest.TestCase):
     def resetTestFile(self):
         """Reset pool file for tests."""
         with open("data/unit-testing/players/players.json", 'w') as testFile:
-            testFile.write('[{"name": "JB", "elo": 500}, {"name": "Manel", "elo": 300}, {"name": "Guilhem", "elo": 3000}]')
+            testFile.write('[{"name": "Guilhem", "elo": 3000},{"name": "JB", "elo": 500}, {"name": "Manel", "elo": 300}]')
 
 
 class LeagueTest(PingPongTest):
@@ -45,7 +42,7 @@ class LeagueTest(PingPongTest):
         self.resetTestFile()
         league = League("data/unit-testing/players/players.json")
 
-        prob = league.winProbability(0, 1)
+        prob = league.winProbability(1, 2)
         self.assertEqual(
             0.76, prob, 'testComppute fails, actula prob : {}'.format(prob))
 
@@ -53,7 +50,7 @@ class LeagueTest(PingPongTest):
         self.resetTestFile()
         league = League("data/unit-testing/players/players.json")
         results = league.searchPlayerByName("JB")
-        self.assertEqual(results, [(0, {
+        self.assertEqual(results, [(1, {
             "name": "JB",
             "elo": 500
         })])

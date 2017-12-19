@@ -60,7 +60,7 @@ class League:
     def save(self):
         """Save the game state into the league json file."""
         with open(self.fileName, 'w') as myFile:
-            myFile.write(json.dumps(self._players))
+            myFile.write(json.dumps(self.sortByElo()))
 
     def printClassement(self):
         """Return the ranking as a string."""
