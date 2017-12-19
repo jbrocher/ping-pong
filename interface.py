@@ -2,17 +2,20 @@
 
 from lib.Interactions import Interactions
 from lib.Menu import Menu
-
+import os
 interact = Interactions()
 
 # Main menu creation
 
-mainMenuParameters = [{"league": "data/players/players.json"}, {"league": "data/players/players0.json"}]
+subMenus = []
+mainMenuParameters = []
+fileList = os.listdir("data/players")
 
-subMenu1 = Menu("player.json", [("simulate", interact.simulateGame), ("exit", interact.exit)])
-subMenu2 = Menu("player0.json", [("simulate", interact.simulateGame), ("exit", interact.exit)])
+for leagueFile in fileList:
+    mainMenuParameters.append({"league": "data/players/{}".format(leagueFile)})
+    subMenus.append(Menu(leagueFile, [("simulate", interact.simulateGame), ("exit", interact.exit)]))
 
-mainMenu = Menu("Leagues", [subMenu1, subMenu2], mainMenuParameters, {"context": True})
+mainMenu = Menu("Leagues", subMenus, mainMenuParameters, {"context": True})
 
 
 interact.welcoming()
