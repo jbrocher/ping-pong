@@ -11,11 +11,6 @@ class Menu:
         self._menus = menus
         self.parameters = parameters
 
-        if parameters==[]:
-            n = len(menus)
-            for i in range(1,n):
-                self.parameters.append({"noParam":True})
-
     def getIntUserInput(self, n1, n2, message):
         """Retrieve an int from the user."""
         error = True
@@ -47,7 +42,8 @@ class Menu:
         """Ask for the choice and executes the action accoringly."""
         n = len(self._menus)
         choice = self.getIntUserInput(0, n, "Type your choice : ")
-        parameters = self.parameters[choice]
+        if choice < len(self.parameters):
+            parameters = self.parameters[choice]
         menu = self._menus[choice]
 
         if type(menu) is Menu:

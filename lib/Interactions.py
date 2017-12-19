@@ -59,7 +59,7 @@ class Interactions:
         game = Game(context["league"], player1, player2)
         game.simulate()
 
-    def exit(self):
+    def exit(self, context):
         """Leave the menu."""
         print('Bye')
         sys.exit()
